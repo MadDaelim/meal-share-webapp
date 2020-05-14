@@ -1,0 +1,36 @@
+<app-top-bar></app-top-bar>
+<div class="container">
+  <div class="d-flex flex-row-reverse bd-highlight mb-2">
+    <button (click)="createOrderClick()" class="btn btn-primary">Create new order</button>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2">
+    <ng-container *ngIf="orders | async as orders; else pending">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Restaurant name</th>
+          <th scope="col">Delivery cost</th>
+          <th scope="col">Order date</th>
+          <th scope="col">Order time</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orders">
+          <th scope="row">1</th>
+          <td>{{order.restaurantName}}</td>
+          <td>{{order.deliveryCost}}</td>
+          <td>{{order.orderDate}}</td>
+          <td>{{order.orderTime}}</td>
+          <td><a routerLink="/orders/{{order.orderId}}">details</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #pending>
+      <div>pending</div>
+    </ng-template>
+  </div>
+</div>

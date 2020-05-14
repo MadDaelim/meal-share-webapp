@@ -1,0 +1,10 @@
+<button (click)="onClickButton($event)" [disabled]="loading" class="btn btn-primary mb-1 col-sm">
+  <span *ngIf="!loading; else loadingTemplate">
+    {{label}}
+  </span>
+</button>
+<div *ngIf="error" class="alert alert-danger mb-1">{{error}}</div>
+
+<ng-template #loadingTemplate>
+  <fa-icon *ngIf="loading" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
+</ng-template>

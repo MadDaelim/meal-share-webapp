@@ -1,0 +1,102 @@
+<app-top-bar></app-top-bar>
+<div class="container">
+  <form (ngSubmit)="onSubmit()" [formGroup]="createOrderForm">
+    <div class="form-group">
+      <label for="restaurantName">Restaurant name</label>
+      <input [ngClass]="{ 'is-invalid': submitted && f.restaurantName.errors }"
+             class="form-control"
+             formControlName="restaurantName"
+             id="restaurantName"
+             type="text"/>
+      <div *ngIf="submitted && f.restaurantName.errors" class="invalid-feedback">
+        <div *ngIf="f.restaurantName.errors.required">Restaurant name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="restaurantMenu">Restaurant menu</label>
+      <input [ngClass]="{ 'is-invalid': submitted && f.restaurantMenu.errors }"
+             class="form-control"
+             formControlName="restaurantMenu"
+             id="restaurantMenu"
+             type="text"/>
+      <div *ngIf="submitted && f.restaurantMenu.errors" class="invalid-feedback">
+        <div *ngIf="f.restaurantMenu.errors.required">Restaurant menu is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="deliveryCost">Delivery cost</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">PLN</span>
+        </div>
+        <input [ngClass]="{ 'is-invalid': submitted && f.deliveryCost.errors }"
+               class="form-control"
+               formControlName="deliveryCost"
+               id="deliveryCost" min="0.00" step="0.05" type="number" value="1.00">
+      </div>
+      <div *ngIf="submitted && f.deliveryCost.errors" class="invalid-feedback">
+        <div *ngIf="f.deliveryCost.errors.required">Delivery cost is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="containerCost">Container cost</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">PLN</span>
+        </div>
+        <input [ngClass]="{ 'is-invalid': submitted && f.containerCost.errors }"
+               class="form-control"
+               formControlName="containerCost"
+               id="containerCost" min="0.00" step="0.05" type="number" value="1.00">
+      </div>
+      <div *ngIf="submitted && f.containerCost.errors" class="invalid-feedback">
+        <div *ngIf="f.containerCost.errors.required">Container cost is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="orderDate">Order date</label>
+      <div class="form-group">
+        <div class="input-group">
+          <input #d="ngbDatepicker"
+                 (click)="d.toggle()"
+                 [ngClass]="{ 'is-invalid': submitted && f.orderDate.errors }"
+                 class="form-control"
+                 formControlName="orderDate"
+                 id="orderDate"
+                 name="dp" ngbDatepicker>
+          <div class="input-group-append">
+            <button (click)="d.toggle()" class="btn btn-outline-secondary" type="button">
+              <fa-icon [icon]="['fas', 'calendar-alt']"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="submitted && f.orderDate.errors" class="invalid-feedback">
+        <div *ngIf="f.orderDate.errors.required">Order date is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="orderTime">Order time</label>
+      <div class="form-group">
+        <div class="input-group">
+          <ngb-timepicker formControlName="orderTime" id="orderTime"></ngb-timepicker>
+        </div>
+      </div>
+      <div *ngIf="submitted && f.orderTime.errors" class="invalid-feedback">
+        <div *ngIf="f.orderTime.errors.required">Order time is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pickUpPlace">Pick up place</label>
+      <input [ngClass]="{ 'is-invalid': submitted && f.pickUpPlace.errors }"
+             class="form-control"
+             formControlName="pickUpPlace"
+             id="pickUpPlace"
+             type="text"/>
+      <div *ngIf="submitted && f.pickUpPlace.errors" class="invalid-feedback">
+        <div *ngIf="f.pickUpPlace.errors.required">Pick up place is required</div>
+      </div>
+    </div>
+    <app-submit-button [error]="error" [loading]="loading" label="Create order"></app-submit-button>
+  </form>
+</div>

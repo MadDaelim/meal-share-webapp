@@ -1,0 +1,62 @@
+<app-top-bar></app-top-bar>
+<div class="container">
+  <ng-container *ngIf="order | async as order; else pending">
+    <div class="d-flex flex-row bd-highlight mb-0">
+      <div class="p-2 bd-highlight">Restaurant name:</div>
+      <div class="p-2 bd-highlight">{{order.restaurantName}}</div>
+      <div class="p-2 bd-highlight">Restaurant menu:</div>
+      <div class="p-2 bd-highlight">{{order.restaurantMenu}}</div>
+    </div>
+    <div class="d-flex flex-row bd-highlight mb-0">
+      <div class="p-2 bd-highlight">Additional cost:</div>
+      <div class="p-2 bd-highlight">
+        <table class="table-bordered">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">Delivery</th>
+            <th scope="col">Container</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{order.deliveryCost}} PLN</td>
+            <td>{{order.containerCost}} PLN</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="d-flex flex-row bd-highlight mb-0">
+      <div class="p-2 bd-highlight">Date and time of order:</div>
+      <div class="p-2 bd-highlight">{{order.orderDate}}</div>
+      <div class="p-2 bd-highlight">{{order.orderTime}}</div>
+    </div>
+    <div class="d-flex flex-row bd-highlight mb-0">
+      <div class="p-2 bd-highlight">Pick up place:</div>
+      <div class="p-2 bd-highlight">{{order.pickUpPlace}}</div>
+    </div>
+    <app-join-order (orderJoined)="replace($event)" [orderId]="order.orderId"></app-join-order>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">User</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dish of order.dishes">
+        <th scope="row">1</th>
+        <td>{{dish.userId}}</td>
+        <td>{{dish.name}}</td>
+        <td>{{dish.price}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-template #pending>
+    <div>pending</div>
+  </ng-template>
+</div>

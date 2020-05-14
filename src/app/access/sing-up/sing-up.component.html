@@ -1,0 +1,43 @@
+<div class="col-md-4 offset-md-4 mt-5">
+  <div class="card">
+    <h4 class="card-header">Create your Meal Share Account</h4>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" [formGroup]="singUpForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                 class="form-control"
+                 formControlName="username"
+                 id="username"
+                 type="text"/>
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                 class="form-control"
+                 formControlName="password"
+                 id="password"
+                 type="password"/>
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                 class="form-control"
+                 formControlName="confirmPassword"
+                 id="confirmPassword"
+                 type="password"/>
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">Password Confirmation is required</div>
+          </div>
+        </div>
+        <app-submit-button [error]="error" [loading]="loading" label="Create user"></app-submit-button>
+      </form>
+    </div>
+  </div>
+</div>
