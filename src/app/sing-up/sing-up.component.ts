@@ -2,17 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {UserService} from '../user.service';
+import {UserService} from '../shared/user.service';
 
 @Component({
-  selector: 'app-sing-in',
-  templateUrl: './sing-in.component.html'
+  selector: 'app-sing-up',
+  templateUrl: './sing-up.component.html'
 })
-export class SingInComponent implements OnInit {
-  loginForm: FormGroup;
+export class SingUpComponent implements OnInit {
+  singUpForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
   error = '';
 
   constructor(
@@ -24,38 +23,34 @@ export class SingInComponent implements OnInit {
   }
 
   get f() {
-    return this.loginForm.controls;
+    return this.singUpForm.controls;
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
+    this.singUpForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     });
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
+    if (this.singUpForm.invalid) {
       return;
     }
 
     this.loading = true;
-    this.userService.singIn(this.f.username.value, this.f.password.value)
+    this.userService.singUp(this.f.username.value, this.f.password.value, this.f.confirmPassword.value)
       .pipe(first())
       .subscribe(
         () => {
-          this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl('/sing-in');
         },
         error => {
           this.error = error;
           this.loading = false;
         });
-  }
-
-  createUserClick() {
-    this.router.navigateByUrl('sing-up');
   }
 }

@@ -1,29 +1,27 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SharedModule} from '../shared/shared.module';
-import {OrdersComponent} from './orders.component';
+import {OrderListComponent} from './list/order-list.component';
 import {OrderCreateComponent} from './create/order-create.component';
 import {OrderDetailsComponent} from './details/order-details.component';
 import {OrderJoinComponent} from './join/order-join.component';
-import {RouterModule} from '@angular/router';
+import {OrdersComponent} from './orders.component';
+import {OrdersRoutingModule} from './orders-routing.module';
+import {TopBarComponent} from './top-bar/top-bar.component';
 
 @NgModule({
   imports: [
-    BrowserModule,
-    RouterModule,
-    ReactiveFormsModule,
+    SharedModule,
     NgbModule,
-    FontAwesomeModule,
-    SharedModule
+    OrdersRoutingModule
   ],
   declarations: [
     OrdersComponent,
+    OrderListComponent,
     OrderCreateComponent,
     OrderDetailsComponent,
-    OrderJoinComponent
+    OrderJoinComponent,
+    TopBarComponent
   ],
 })
 export class OrdersModule {
