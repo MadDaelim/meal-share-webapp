@@ -7,7 +7,6 @@ const routes: Routes = [
   {path: 'sing-in', loadChildren: () => import('./sing-in/sing-in.module').then(m => m.SingInModule)},
   {path: 'sing-up', loadChildren: () => import('./sing-up/sing-up.module').then(m => m.SingUpModule)},
   {path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule), canActivate: [AuthGuardService]},
-  {path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule), canActivate: [AuthGuardService]},
   {path: '**', redirectTo: 'orders', pathMatch: 'full'}
 ];
 
